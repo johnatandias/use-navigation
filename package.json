@@ -1,0 +1,29 @@
+{
+  "name": "use-navigation",
+  "version": "0.0.1",
+  "description": "KaiOS navigation with React Hooks",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnatandias/use-navigation.git"
+  },
+  "scripts": {
+    "prepublish": "tsc"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "kaios"
+  ],
+  "author": "Johnatan Dias",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^16.8.23",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.0"
+  }
+}
