@@ -1,27 +1,32 @@
 {
   "name": "use-navigation",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "KaiOS navigation with React Hooks",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "Johnatan Dias",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/johnatandias/use-navigation.git"
   },
   "scripts": {
+    "dev": "tsc --watch",
     "prepublish": "tsc"
   },
   "keywords": [
     "react",
     "hooks",
-    "kaios"
+    "kaios",
+    "navigation",
+    "d-pad"
   ],
-  "author": "Johnatan Dias",
-  "license": "ISC",
   "devDependencies": {
-    "@types/react": "^16.8.23",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "**/react": "16.*.*",
+    "**/react-dom": "16.*.*"
   },
   "peerDependencies": {
     "react": ">= 16.8.0"

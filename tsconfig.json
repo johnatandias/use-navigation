@@ -2,13 +2,18 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "declaration": true,
     "moduleResolution": "node",
-    "noResolve": false,
-    "noImplicitAny": false,
     "removeComments": true,
-    "sourceMap": true,
-    "allowJs": true,
-    "jsx": "react"
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "outDir": "./dist",
+    "rootDir": "./src",
   },
   "exclude": [
     "./node_modules/**/*",

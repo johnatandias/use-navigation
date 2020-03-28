@@ -1,21 +1,25 @@
+// @ts-ignore
 import { useState, useEffect } from 'react';
 
-interface ICurrent {
-  type: string | null
-  index: number | null
-}
+interface IHandleNavigation {
+  currentIndex: number,
+  allElements: NodeListOf<Element>
+};
 
-const useNavigation = () => {
+const useNavigation = (): [number, (currentIndex: number) => void] => {
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown);
+
     setNavigation(0);
 
     return () => document.removeEventListener('keydown', onKeyDown);
   }, []);
 
-  const [current, setCurrent] = useState<ICurrent>({ type: null, index: null });
+  const [current, setCurrent] = useState<number>(0);
 
-  const getAllElements = (): NodeListOf<Element> => document.querySelectorAll('[nav-selectable]');
+  const getAllElements = (): NodeListOf<Element> => (
+    document.querySelectorAll('[nav-selectable]')
+  );
 
   const getTheIndexOfTheSelectedElement = (): number => {
     const element = document.querySelector('[nav-selected=true]');
@@ -24,27 +28,33 @@ const useNavigation = () => {
       : 0;
   }
 
-  const setNavigation = (index: number) => selectElement(getAllElements()[index] || document.body);
+  const setNavigation = (currentIndex: number): void => (
+    selectElement(getAllElements()[currentIndex] || document.body)
+  );
 
-  const onKeyDown = (evt: KeyboardEvent) => {
-    if (evt.key !== 'ArrowDown' && evt.key !== 'ArrowUp') return;
+  const handleNavigation = {
+    ArrowDown: ({ currentIndex, allElements }: IHandleNavigation) => {
+      const goToFirstElement = currentIndex + 1 > allElements.length - 1;
+      const setIndex = goToFirstElement ? 0 : currentIndex + 1;
+      selectElement(allElements[setIndex] || allElements[0], setIndex);
+    },
+    ArrowUp: ({ currentIndex, allElements }: IHandleNavigation) => {
+      const goToLastElement = currentIndex === 0;
+      const setIndex = goToLastElement ? allElements.length - 1 : currentIndex - 1;
+      selectElement(allElements[setIndex] || allElements[0], setIndex);
+    }
+  };
+
+  const onKeyDown = (event: KeyboardEvent) => {
+    const goToDown = event.key === 'ArrowDown';
+    const goToUp = event.key === 'ArrowUp';
+    if (!goToDown && !goToUp) return;
+
+    const key = event.key as 'ArrowDown' | 'ArrowUp';
 
     const allElements = getAllElements();
     const currentIndex = getTheIndexOfTheSelectedElement();
-
-    let setIndex;
-    switch (evt.key) {
-      case 'ArrowDown':
-        const goToFirstElement = currentIndex + 1 > allElements.length - 1;
-        setIndex = goToFirstElement ? 0 : currentIndex + 1;
-        return selectElement(allElements[setIndex] || allElements[0], setIndex);
-      case 'ArrowUp':
-        const goToLastElement = currentIndex === 0;
-        setIndex = goToLastElement ? allElements.length - 1 : currentIndex - 1;
-        return selectElement(allElements[setIndex] || allElements[0], setIndex);
-      default:
-        break;
-    }
+    handleNavigation[key]({ currentIndex, allElements });
   }
 
   const selectElement = (selectElement: Element, setIndex = 0) => {
@@ -53,7 +63,7 @@ const useNavigation = () => {
         element.setAttribute('nav-selected', (element === selectElement).toString())
         element.setAttribute('nav-index', (index).toString())
       });
-      setCurrent({ type: selectElement.tagName, index: setIndex });
+      setCurrent(setIndex);
     } else {
       setNavigation(0);
     }

@@ -43,10 +43,3 @@ div[nav-selected='true'] {
   color: white;
 }
 ```
-
-To know the current index by javascript, you get this way:
-
-```javascript
-const currentElement = document.querySelector('[nav-selected=true]');
-const currentIndex = parseInt(currentElement.getAttribute('nav-index'));
-```
