@@ -1,5 +1,9 @@
 # useNavigation
 
+![GitHub package.json version](https://img.shields.io/github/package-json/v/johnatandias/use-navigation)
+![npm](https://img.shields.io/npm/v/use-navigation)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/use-navigation)
+
 KaiOS navigation with React Hooks
 
 ### Installation
