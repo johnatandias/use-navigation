@@ -6,6 +6,10 @@ KaiOS navigation with React Hooks
 
 ```bash
 yarn add use-navigation
+
+# or
+
+npm i use-navigation
 ```
 
 ### Usage:
@@ -13,10 +17,9 @@ yarn add use-navigation
 ```javascript
 import React from 'react';
 import useNavigation from 'use-navigation';
-import './App.css';
 
 const App = () => {
-  const [current, setNavigation] = useNavigation();
+  const [currentIndex, selectPrevious, selectNext] = useNavigation();
 
   return (
     <div>
@@ -26,8 +29,11 @@ const App = () => {
 
       <div nav-selectable="true">A</div>
       <div nav-selectable="true">B</div>
-      <div>Not selectable</div>
+      <div>Not selectable - Advertising for example</div>
       <div nav-selectable="true">C</div>
+      <div nav-selectable="true">D</div>
+      <div nav-selectable="true">E</div>
+      <div nav-selectable="true">F</div>
     </div>
   );
 };
@@ -35,7 +41,8 @@ const App = () => {
 export default App;
 ```
 
-In your css file, you can apply a style for the current item
+In your css file, you can apply a different style for the current item.
+Make this for see the exemplo above
 
 ```css
 div[nav-selected='true'] {

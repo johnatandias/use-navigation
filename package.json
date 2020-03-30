@@ -1,6 +1,6 @@
 {
   "name": "use-navigation",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "KaiOS navigation with React Hooks",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

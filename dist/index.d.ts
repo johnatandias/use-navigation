@@ -1,2 +1,2 @@
-declare const useNavigation: () => [number, (currentIndex: number) => void];
+declare const useNavigation: () => [number, () => void, () => void];
 export default useNavigation;
